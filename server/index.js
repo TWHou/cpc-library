@@ -1,5 +1,4 @@
-// server.js
-// where your node app starts
+require('dotenv').config({path: __dirname + '/.env'});
 
 // init project
 const express = require('express');
@@ -13,9 +12,10 @@ const apiRouter = require('./routes/api.js');
 const authRouter = require('./routes/auth.js');
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGO_URI, {useMongoClient: true})
   .then(() => console.info('connection successful'))
   .catch((err) => console.error(err));
 
@@ -33,6 +33,6 @@ app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 
 // listen for requests :)
-const listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+app.listen(PORT, function () {
+  console.info(`Listening on port ${PORT}`);
 });
