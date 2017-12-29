@@ -1,10 +1,7 @@
 {
-  "name": "heroku-cra-node",
+  "name": "cpc-library",
   "version": "1.0.0",
-  "description": "How to use create-react-app with a custom Node API on Heroku",
-  "engines": {
-    "node": "6.11.x"
-  },
+  "description": "Manage books on the HIV/AIDS bookshelf",
   "scripts": {
     "start": "node server",
     "heroku-postbuild": "cd react-ui/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
@@ -14,7 +11,14 @@
     "react-ui/node_modules"
   ],
   "dependencies": {
-    "express": "^4.14.1"
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.13.8",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.4.0"
   },
   "repository": {
     "type": "git",
@@ -27,5 +31,9 @@
     "react"
   ],
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "babel-eslint": "^8.1.2",
+    "eslint": "^4.14.0",
+    "eslint-plugin-react": "^7.5.1"
+  }
 }
