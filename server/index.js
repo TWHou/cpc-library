@@ -26,9 +26,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 require('./config/passport')(passport);
 
-// http://expressjs.com/en/starter/basic-routing.html
-app.use(express.static(path.resolve(__dirname, 'views/index.html')));
-
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 

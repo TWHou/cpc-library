@@ -5,16 +5,16 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import thunk from 'redux-thunk';
 
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
-import combineReducers from './reducers';
+import reducer from './reducers';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-  combineReducers,
+  reducer,
   composeEnhancers(
     applyMiddleware(thunk)
   )
