@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 class BookList extends Component {
   render () {
@@ -9,9 +9,5 @@ class BookList extends Component {
     );
   }
 }
-
-BookList.propTypes = {
-  books: PropTypes.array,
-};
 
 export default BookList;

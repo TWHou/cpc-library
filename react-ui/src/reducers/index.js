@@ -1,29 +1,9 @@
-import {
-  RECEIVE_BOOKS,
-  RECEIVE_BOOK,
-  ADD_BOOK
-} from '../actions';
+import { combineReducers } from 'redux';
 
-const reducer = (state={}, action) => {
-  switch(action.type) {
-  case RECEIVE_BOOKS:
-    return {
-      ...state,
-      books: action.books
-    };
-  case RECEIVE_BOOK:
-    return {
-      ...state,
-      book: action.book
-    };
-  case ADD_BOOK:
-    return {
-      ...state,
-      book: action.book
-    };
-  default:
-    return state;
-  }
-};
+import bookReducer from './bookReducer';
+import authReducer from './authReducer';
 
-export default reducer;
+export default combineReducers({
+  book: bookReducer,
+  auth: authReducer
+});

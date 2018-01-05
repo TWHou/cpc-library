@@ -36,4 +36,14 @@ api.return = (bookId) => axios.post(`api/return/${bookId}`)
 api.addBook = (book) => axios.post('api/add', {...book})
 .then((res) => res.data);
 
+// login
+
+api.login = (user) => axios.post('auth/login', user)
+.then((res) => res.data);
+
+// logout
+
+api.logout = () => axios.get('auth/logout')
+.then((res) => res.data);
+
 export default api;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Switch, Route, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getBooksAPI } from '../actions';
+import { getBooksAPI } from '../actions/bookActions';
 import Header from './Header';
 import BookList from './BookList';
 import BookDetail from './BookDetail';
