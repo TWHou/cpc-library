@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const axios = require('axios');
 
 const Book = require('../models/Book');
 const Verify = require('./verify');
@@ -75,12 +76,26 @@ const returnBook = (req, res, next) => {
     });
 };
 
+const search = (req, res, next) => {
+  const query = req.params.query;
+  const key = process.env.BOOKS_API;
+  console.log(`received query: ${query}`);
+  axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${key}`)
+    .then((resp) => {
+      res.status(200).send(resp.data.items);
+    })
+    .catch((err) => next(err));
+};
+
 const addBook = (req, res, next) => {
+  const { title, author, category, id } = req.body;
   const book = new Book({
-    title: req.body.title,
-    subtitle: req.body.subtitle,
-    author: req.body.author
+    title,
+    author,
+    category,
+    id
   });
+
   book.save((err, book) => {
     if (err) {
       return next(err);
@@ -96,8 +111,9 @@ router.get('/', function (req, res) {
 
 router.get('/books', Verify.verifyUser, getBooks);
 router.get('/book/:bookId', Verify.verifyUser, getBook);
+router.get('/search/:query', search);
 router.post('/checkout/:bookId', Verify.verifyUser, checkout);
 router.post('/return/:bookId', Verify.verifyUser, returnBook);
-router.post('/add', Verify.verifyUser, addBook);
+router.post('/add', addBook);
 
 module.exports = router;

@@ -4,6 +4,6 @@ import bookReducer from './bookReducer';
 import authReducer from './authReducer';
 
 export default combineReducers({
-  book: bookReducer,
-  auth: authReducer
+  bookState: bookReducer,
+  authState: authReducer
 });

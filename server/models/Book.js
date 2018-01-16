@@ -2,19 +2,20 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const categoryCheck = val => {
-  const arr = ["College", "Finacial Literacy", "Healthy Relationship", "History", "Identity", "Life Skills", "Sexual Health"];
+  const arr = ['College', 'Finacial Literacy', 'Healthy Relationship', 'History', 'Identity', 'Life Skills', 'Sexual Health'];
   return arr.includes(val);
-}
+};
 
 const bookSchema = new Schema({
   title: { 
     type: String,
     required: true
   },
-  subtitle: {
-    type: String
-  },
   author: {
+    type: String,
+    required: true
+  },
+  id: {
     type: String,
     required: true
   },
