@@ -11,7 +11,7 @@ const getBooks = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.status(200).send({books});
+      res.status(200).send(books);
     });
 };
 
@@ -79,7 +79,6 @@ const returnBook = (req, res, next) => {
 const search = (req, res, next) => {
   const query = req.params.query;
   const key = process.env.BOOKS_API;
-  console.log(`received query: ${query}`);
   axios.get(`https://www.googleapis.com/books/v1/volumes?q=${query}&key=${key}`)
     .then((resp) => {
       res.status(200).send(resp.data.items);
@@ -100,7 +99,7 @@ const addBook = (req, res, next) => {
     if (err) {
       return next(err);
     }
-    res.status(200).send({book});
+    res.status(200).send(book);
   });
 };
 
@@ -109,11 +108,11 @@ router.get('/', function (req, res) {
   res.send('{"message":"Hello from the custom server!"}');
 });
 
-router.get('/books', Verify.verifyUser, getBooks);
-router.get('/book/:bookId', Verify.verifyUser, getBook);
+router.get('/books', getBooks);
+router.get('/books/:bookId', getBook);
 router.get('/search/:query', search);
-router.post('/checkout/:bookId', Verify.verifyUser, checkout);
-router.post('/return/:bookId', Verify.verifyUser, returnBook);
+router.post('/checkout/:bookId', checkout);
+router.post('/return/:bookId', returnBook);
 router.post('/add', addBook);
 
 module.exports = router;

@@ -9,7 +9,10 @@ const bookReducer = (state={}, action) => {
   case RECEIVE_BOOKS:
     return {
       ...state,
-      books: action.books
+      books: action.books.reduce((accu, curr) => {
+        accu[curr._id] = curr;
+        return accu;
+      }, {})
     };
   case RECEIVE_BOOK:
     return {

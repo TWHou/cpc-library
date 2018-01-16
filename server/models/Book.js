@@ -16,8 +16,7 @@ const bookSchema = new Schema({
     required: true
   },
   id: {
-    type: String,
-    required: true
+    type: String
   },
   onShelf: {
     type: Boolean,

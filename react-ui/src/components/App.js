@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-import { getBooksAPI } from '../actions/bookActions';
 import Header from './Header';
 import BookList from './BookList';
 import BookDetail from './BookDetail';
@@ -26,13 +23,4 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  getBooks: PropTypes.func,
-};
-
-export default  withRouter(connect(
-  null,
-  {
-    getBooks: getBooksAPI
-  }
-)(App));
+export default withRouter(App);

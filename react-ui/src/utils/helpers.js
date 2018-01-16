@@ -6,8 +6,12 @@ export const trunc = (str) => {
   return str; 
 };
 
-export function capitalize (str = '') {
-  return typeof str !== 'string'
-    ? ''
-    : str[0].toUpperCase() + str.slice(1);
-}
+export const isOverdue = (dueDate) => {
+  const due = new Date(dueDate).getTime();
+  const now = new Date().getTime();
+
+  if(due > now){
+    return false;
+  }
+  return true;
+};
