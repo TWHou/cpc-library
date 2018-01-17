@@ -13,7 +13,6 @@ class BookList extends Component {
 
   handleClick = (bookId) => {
     this.props.history.push(`/${bookId}`);
-    console.log(`Clicked: ${bookId}`);
   }
 
   render () {

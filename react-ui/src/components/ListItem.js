@@ -11,7 +11,7 @@ class ListItem extends Component {
 
   render () {
     const book = this.props.book;
-    const status = book.onShelf ? 'On Shelf' : isOverdue(book.dueDate) ? 'Overdue' : new Date(book.dueDate).getTime();
+    const status = book.onShelf ? 'On Shelf' : isOverdue(book.dueDate) ? 'Overdue' : 'Checked Out';
     return (
       <tr onClick={this.handleClick}>
         <td>{book.title}</td>

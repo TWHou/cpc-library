@@ -1,6 +1,7 @@
 import {
   RECEIVE_BOOKS,
   RECEIVE_BOOK,
+  CHECKOUT_BOOK,
   ADD_BOOK
 } from '../actions/bookActions';
 
@@ -18,6 +19,22 @@ const bookReducer = (state={}, action) => {
     return {
       ...state,
       book: action.book
+    };
+  case CHECKOUT_BOOK:
+    return {
+      ...state,
+      books: {
+        ...state.books,
+        [action.book._id]: action.book
+      },
+      book: {
+        ...state.book,
+        name: action.book.name,
+        email: action.book.email,
+        dueDate: action.book.dueDate,
+        borrowed: action.book.borrowed,
+        onShelf: action.book.onShelf
+      }
     };
   case ADD_BOOK:
     return {

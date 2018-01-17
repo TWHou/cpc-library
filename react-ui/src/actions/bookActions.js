@@ -31,6 +31,19 @@ export const getBookAPI = (id) => (dispatch) => {
   );
 };
 
+const checkout = (book) => ({
+  type: CHECKOUT_BOOK,
+  book
+});
+
+export const checkoutAPI = (id, info) => (dispatch) => {
+  api.checkout(id, info).then(
+    (book) => {
+      dispatch(checkout(book));
+    }
+  );
+};
+
 const addBook = (book) => ({
   type: ADD_BOOK,
   book

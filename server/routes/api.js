@@ -49,20 +49,21 @@ const checkout = (req, res, next) => {
         book.email = req.body.email;
         book.onShelf = false;
         book.borrowed = new Date();
-        book.dueDate = book.borrowed;
+        book.dueDate = new Date();
         book.dueDate.setDate(book.dueDate.getDate() + 21);
       } else {
         book.renewed++;
+        book.dueDate.setDate(book.dueDate.getDate() + 21);
         if (book.renewed > 3) {
           return next('renewed too many times');
         }
       }
-      book.staff = req.payload._id;
+      // book.staff = req.payload._id;
       book.save((err, book) => {
         if (err) {
           return next(err);
         }
-        res.status(200).send({book});
+        res.status(200).send(book);
       });
     });
 };
