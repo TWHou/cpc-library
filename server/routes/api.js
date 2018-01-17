@@ -21,7 +21,20 @@ const getBook = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.status(200).send({book});
+      if (book.id) {
+        axios.get(`https://www.googleapis.com/books/v1/volumes/${book.id}`)
+          .then((resp) => {
+            const { title, author, category, _id, id, renewed, onShelf, dueDate, name, email, staff } = book;
+            const image = resp.data.volumeInfo.imageLinks.thumbnail;
+            const description = resp.data.volumeInfo.description;
+            const curBook = {
+              title, author, category, _id, id, renewed, onShelf, image, description, dueDate, name, email, staff
+            };
+            res.status(200).send(curBook);
+          }).catch((err) => next(err));
+      } else {
+        res.status(200).send(book);
+      }
     });
 };
 
