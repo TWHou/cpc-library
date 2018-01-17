@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Modal from './Modal';
-import { getBookAPI, checkoutAPI, returnAPI } from '../actions/bookActions';
+import { getBookAPI, checkoutAPI, renewAPI, returnAPI } from '../actions/bookActions';
 import { isOverdue } from '../utils/helpers';
 
 class BookDetail extends Component {
@@ -49,6 +49,10 @@ class BookDetail extends Component {
     this.props.returnBook(this.props.match.params.bookId);
   }
 
+  renew = () => {
+    this.props.renew(this.props.match.params.bookId);
+  }
+
   componentDidMount () {
     this.props.getBook(this.props.match.params.bookId);
   }
@@ -61,6 +65,14 @@ class BookDetail extends Component {
     const buttons = () => {
       if (book.onShelf) {
         return <button type="button" className="btn btn-success btn-block" onClick={this.openCheckout}>Checkout</button>;
+      }
+      if (book.renewed < 3) {
+        return (
+          <Fragment>
+            <button type="button" className="btn btn-secondary btn-block" onClick={this.renew}>Renew</button>
+            <button type="button" className="btn btn-info btn-block" onClick={this.returnBook}>Return</button>
+          </Fragment>
+        );
       }
       return <button type="button" className="btn btn-info btn-block" onClick={this.returnBook}>Return</button>;
     };
@@ -162,6 +174,7 @@ BookDetail.propTypes = {
   book: PropTypes.object,
   getBook: PropTypes.func,
   checkout: PropTypes.func,
+  renew: PropTypes.func,
   returnBook: PropTypes.func,
 };
 
@@ -177,6 +190,7 @@ export default connect(
   { 
     getBook: getBookAPI,
     checkout: checkoutAPI,
+    renew: renewAPI,
     returnBook: returnAPI
   }
 )(BookDetail);

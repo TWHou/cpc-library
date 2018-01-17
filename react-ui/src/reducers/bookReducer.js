@@ -2,6 +2,7 @@ import {
   RECEIVE_BOOKS,
   RECEIVE_BOOK,
   CHECKOUT_BOOK,
+  RENEW_BOOK,
   RETURN_BOOK,
   ADD_BOOK
 } from '../actions/bookActions';
@@ -35,6 +36,19 @@ const bookReducer = (state={}, action) => {
         dueDate: action.book.dueDate,
         borrowed: action.book.borrowed,
         onShelf: action.book.onShelf
+      }
+    };
+  case RENEW_BOOK:
+    return {
+      ...state,
+      books: {
+        ...state.books,
+        [action.book._id]: action.book
+      },
+      book: {
+        ...state.book,
+        dueDate: action.book.dueDate,
+        renewed: action.book.renewed
       }
     };
   case RETURN_BOOK:

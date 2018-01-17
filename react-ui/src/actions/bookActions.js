@@ -40,6 +40,17 @@ export const checkoutAPI = (id, info) => (dispatch) => {
   );
 };
 
+const renew = (book) => ({
+  type: RENEW_BOOK,
+  book
+});
+
+export const renewAPI = (id) => (dispatch) => {
+  api.renew(id).then(
+    (book) => dispatch(renew(book))
+  );
+};
+
 const returnBook = (book) => ({
   type: RETURN_BOOK,
   book

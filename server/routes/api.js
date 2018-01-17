@@ -53,7 +53,7 @@ const checkout = (req, res, next) => {
         book.dueDate.setDate(book.dueDate.getDate() + 21);
       } else {
         book.renewed++;
-        book.dueDate.setDate(book.dueDate.getDate() + 21);
+        book.dueDate.setDate(new Date().getDate() + 21);
         if (book.renewed > 3) {
           return next('renewed too many times');
         }
@@ -85,7 +85,6 @@ const returnBook = (req, res, next) => {
         if (err) {
           return next(err);
         }
-        console.log(book);
         res.status(200).send(book);
       });
     });
