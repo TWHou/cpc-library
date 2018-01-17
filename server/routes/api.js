@@ -74,18 +74,19 @@ const returnBook = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      delete book.name;
-      delete book.email;
-      delete book.borrowed;
-      delete book.dueDate;
-      delete book.staff;
+      book.name = undefined;
+      book.email = undefined;
+      book.borrowed = undefined;
+      book.dueDate = undefined;
+      book.staff = undefined;
       book.renewed = 0;
       book.onShelf = true;
       book.save((err, book) => {
         if (err) {
           return next(err);
         }
-        res.status(200).send({book});
+        console.log(book);
+        res.status(200).send(book);
       });
     });
 };

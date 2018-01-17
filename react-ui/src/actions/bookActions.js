@@ -25,9 +25,7 @@ const receiveBook = (book) => ({
 
 export const getBookAPI = (id) => (dispatch) => {
   api.getBook(id).then(
-    (book) => {
-      dispatch(receiveBook(book));
-    }
+    (book) => dispatch(receiveBook(book))
   );
 };
 
@@ -38,9 +36,18 @@ const checkout = (book) => ({
 
 export const checkoutAPI = (id, info) => (dispatch) => {
   api.checkout(id, info).then(
-    (book) => {
-      dispatch(checkout(book));
-    }
+    (book) => dispatch(checkout(book))
+  );
+};
+
+const returnBook = (book) => ({
+  type: RETURN_BOOK,
+  book
+});
+
+export const returnAPI = (id) => (dispatch) => {
+  api.return(id).then(
+    (book) => dispatch(returnBook(book))
   );
 };
 

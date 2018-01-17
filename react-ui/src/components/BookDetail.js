@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import Modal from './Modal';
-import { getBookAPI, checkoutAPI } from '../actions/bookActions';
+import { getBookAPI, checkoutAPI, returnAPI } from '../actions/bookActions';
 import { isOverdue } from '../utils/helpers';
 
 class BookDetail extends Component {
@@ -45,6 +45,10 @@ class BookDetail extends Component {
     this.closeCheckout();
   }
 
+  returnBook = () => {
+    this.props.returnBook(this.props.match.params.bookId);
+  }
+
   componentDidMount () {
     this.props.getBook(this.props.match.params.bookId);
   }
@@ -58,7 +62,7 @@ class BookDetail extends Component {
       if (book.onShelf) {
         return <button type="button" className="btn btn-success btn-block" onClick={this.openCheckout}>Checkout</button>;
       }
-      return <button type="button" className="btn btn-info btn-block">Return</button>;
+      return <button type="button" className="btn btn-info btn-block" onClick={this.returnBook}>Return</button>;
     };
     return (
       <div className="row">
@@ -158,6 +162,7 @@ BookDetail.propTypes = {
   book: PropTypes.object,
   getBook: PropTypes.func,
   checkout: PropTypes.func,
+  returnBook: PropTypes.func,
 };
 
 const mapStateToProps = ({ bookState }) => {
@@ -171,6 +176,7 @@ export default connect(
   mapStateToProps,
   { 
     getBook: getBookAPI,
-    checkout: checkoutAPI
+    checkout: checkoutAPI,
+    returnBook: returnAPI
   }
 )(BookDetail);
